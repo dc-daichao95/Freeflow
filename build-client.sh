@@ -1,12 +1,27 @@
-cd libraries/libmlx4-1.2.1mlnx1/
-make
-make install
+#!/bin/bash
+set -xe
 
-cd ../libibverbs-1.2.1mlnx1/
-make
-make install
+# Install Memory Pool
+cd libmempool && make clean && make && make install && cd ..
 
-cd ../librdmacm-1.1.0mlnx/
-make
-make install
+cd libraries/libmlx4-1.2.1mlnx1
+./autogen.sh
+./configure --prefix=/usr/ --libdir=/usr/lib/ --sysconfdir=/etc/
+make clean && make && make install
+cd ..
+
+
+cd libibverbs-1.2.1mlnx1
+./autogen.sh
+./configure --prefix=/usr/ --libdir=/usr/lib/ --sysconfdir=/etc/
+make clean && make && make install
+cd ..
+
+
+cd librdmacm-1.1.0mlnx
+./autogen.sh
+./configure --prefix=/usr/ --libdir=/usr/lib/ --sysconfdir=/etc/
+make clean && make && make install
+cd ..
+
 
