@@ -19,7 +19,8 @@ endif
 src_librdmacm_la_SOURCES = src/cma.c src/addrinfo.c src/acm.c \
 		src/rsocket.c src/indexer.c src/freeflow.c
 src_librdmacm_la_LDFLAGS = -version-info 1 -export-dynamic \
-			   $(librdmacm_version_script)
+			   $(librdmacm_version_script) -L/usr/lib/ -libverbs -lmempool \
+			   -L/usr/lib64/ -lpthread -lrt
 src_librdmacm_la_DEPENDENCIES =  $(srcdir)/src/librdmacm.map
 
 src_librspreload_la_SOURCES = src/preload.c src/indexer.c

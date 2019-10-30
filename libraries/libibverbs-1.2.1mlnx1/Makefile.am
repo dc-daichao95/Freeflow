@@ -18,7 +18,7 @@ src_libibverbs_la_SOURCES += src/neigh.c
 noinst_HEADERS = src/neigh.h
 endif
 src_libibverbs_la_LDFLAGS = -version-info 1 -export-dynamic $(LIBNL_LIBS)\
-    $(libibverbs_version_script)
+    $(libibverbs_version_script) -L/usr/lib/ -lmempool -L/usr/lib64/ -lrt
 src_libibverbs_la_DEPENDENCIES = $(srcdir)/src/libibverbs.map
 
 bin_PROGRAMS = examples/ibv_devices examples/ibv_devinfo \
