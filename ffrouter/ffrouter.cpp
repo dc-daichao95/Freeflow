@@ -211,7 +211,7 @@ FreeFlowRouter::FreeFlowRouter(const char* name) {
         setup_ib(&this->rdma_data);
         LOG_DEBUG("RDMA Dev: dev.name=" << this->rdma_data.ib_device->name << ", " <<  "dev.dev_name=" << this->rdma_data.ib_device->dev_name);    
     }
-
+	/*
     this->vip_map["10.47.0.4"] = "192.168.2.13";
     this->vip_map["10.47.0.6"] = "192.168.2.13";
     this->vip_map["10.47.0.7"] = "192.168.2.13";
@@ -219,6 +219,13 @@ FreeFlowRouter::FreeFlowRouter(const char* name) {
     this->vip_map["10.44.0.3"] = "192.168.2.15";
     this->vip_map["10.44.0.4"] = "192.168.2.15";
     this->vip_map["10.44.0.6"] = "192.168.2.15";
+    */
+    this->vip_map["10.32.0.1"] = "192.168.12.64";
+	this->vip_map["10.32.0.2"] = "192.168.12.64";
+	this->vip_map["10.32.0.3"] = "192.168.12.64";
+	this->vip_map["10.32.0.4"] = "192.168.12.64";
+    
+    this->vip_map["10.44.0.0"] = "192.168.12.65";
 }
 
 void FreeFlowRouter::start()
@@ -277,7 +284,10 @@ void FreeFlowRouter::start()
             exit(1);
         }
         LOG_TRACE("New client with sock " << client_sock << ".");
-    
+
+		int o_flags = fcntl(client_sock, F_GETFL);
+        fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
+		
         // Start a thread to handle the request.     
         pthread_t *pth = (pthread_t *) malloc(sizeof(pthread_t));
         struct HandlerArgs *args = (struct HandlerArgs *) malloc(sizeof(struct HandlerArgs));
