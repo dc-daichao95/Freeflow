@@ -818,7 +818,7 @@ void HandleRequest(struct HandlerArgs *args)
 
 	int o_flags = fcntl(client_sock, F_GETFL);
     fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
-	LOG_TRACE("flag:" << o_flags << ", after flag:" o_flags & ~O_NONBLOCK);
+	LOG_TRACE("flag:" << o_flags << ", after flag:" << o_flags & ~O_NONBLOCK);
 	 
         switch(header.func)
         {
