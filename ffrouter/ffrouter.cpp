@@ -816,6 +816,10 @@ void HandleRequest(struct HandlerArgs *args)
         LOG_TRACE("Get request cmd " << header.func);
     }
 
+	int o_flags = fcntl(client_sock, F_GETFL);
+    fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
+	LOG_TRACE(o_flags << o_flags & ~O_NONBLOCK);
+	 
         switch(header.func)
         {
             case IBV_GET_CONTEXT:

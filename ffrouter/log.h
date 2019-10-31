@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#define LOG_LEVEL 2
+#define LOG_LEVEL 1
 
 #define LOG_INFO(x) (((LOG_LEVEL) <= 3) ? std::cout << "[INFO] "  << x << std::endl : std::cout << "")
 #define LOG_DEBUG(x) (((LOG_LEVEL) <= 2) ? std::cout << "[DEBUG] " << x << std::endl : std::cout << "")
