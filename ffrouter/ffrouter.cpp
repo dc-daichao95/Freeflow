@@ -811,14 +811,15 @@ void HandleRequest(struct HandlerArgs *args)
 
             goto kill;
         }
-    else
-    {
-        LOG_TRACE("Get request cmd " << header.func);
-    }
+	    else
+    	{
+        	LOG_TRACE("Get request cmd " << header.func);
+	    }
 
-	int o_flags = fcntl(client_sock, F_GETFL);
-    fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
-	LOG_TRACE("flag:" << o_flags << ", after flag:" << o_flags & ~O_NONBLOCK);
+		int o_flags = fcntl(client_sock, F_GETFL);
+	    fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
+		int a_flags = o_flags & ~O_NONBLOCK;
+		LOG_INFO("flag:" << o_flags << ", after flag:" << a_flags);
 	 
         switch(header.func)
         {
