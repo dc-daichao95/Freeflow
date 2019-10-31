@@ -449,6 +449,10 @@ void request_router(RDMA_FUNCTION_CALL req, void* req_body, void *rsp, int *rsp_
 		pthread_mutex_lock(&(unix_sock->mutex));
 	}
 	int n;
+
+	int o_flags = fcntl(unix_sock->sock, F_GETFL);
+    fcntl(unix_sock->sock, F_SETFL, o_flags & ~O_NONBLOCK);
+        
 	if ((n = write(unix_sock->sock, &header, sizeof(header))) < sizeof(header))
 	{
 		if (n < 0)

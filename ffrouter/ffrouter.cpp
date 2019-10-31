@@ -285,8 +285,8 @@ void FreeFlowRouter::start()
         }
         LOG_TRACE("New client with sock " << client_sock << ".");
 
-		int o_flags = fcntl(client_sock, F_GETFL);
-        fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
+		//int o_flags = fcntl(client_sock, F_GETFL);
+        //fcntl(client_sock, F_SETFL, o_flags & ~O_NONBLOCK);
 		
         // Start a thread to handle the request.     
         pthread_t *pth = (pthread_t *) malloc(sizeof(pthread_t));
